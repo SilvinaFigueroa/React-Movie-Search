@@ -3,6 +3,10 @@ import { useState } from "react"
 const Form = ({ movieSearch }) => {
     const [formData, setFormData] = useState({ title: '' })
 
+
+// Event handling functions 
+
+    // Use spread operator ...array when using form to prevent overriding data
     function handleChange(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
@@ -10,6 +14,7 @@ const Form = ({ movieSearch }) => {
         e.preventDefault() // Form submission always needs the prevent default
         movieSearch(formData.title)
      }
+     
     return (
         <div>
             <form onSubmit={handleSubmit} action="">

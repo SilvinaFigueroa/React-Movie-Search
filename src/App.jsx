@@ -7,15 +7,17 @@ import axios from "axios"
 import Form from './components/Form'
 import MovieDisplay from './components/MovieDisplay'
 
+// .env with Vite -> Always use VITE_ 
 let apiKey = import.meta.env.VITE_apiKey
 
 function App() {
   //UseState
   const [movieData, setMovieData] = useState(null)
 
+  // Get request with Axios 
   async function search(searchTerm) {
     try {
-
+      // Logic for empty search (UseEffect and empty form submission)
       if (searchTerm === '') {
         let min = 1000000
         let max = 2000000
@@ -33,15 +35,17 @@ function App() {
         let response = await axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&t=${searchTerm}`)
         setMovieData(response.data)
       }
+      // Error handling
     } catch (err) {
       console.error(err)
     }
   }
 
+  // Return a movie everytime the component load (empty dependencies array)
   useEffect(() => {
     search('')
-
   }, [])
+
 
   return (
     <>

@@ -1,6 +1,8 @@
 
 const MovieDisplay = ({ movie }) => {
 
+    // functions created to handle empty content. 
+    // Check alternative conditional rendering options on app.jsx return components 
     const loading = () => {
         return <h5>No Movie to Display</h5>
     }
