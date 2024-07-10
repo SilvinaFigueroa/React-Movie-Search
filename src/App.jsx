@@ -1,6 +1,6 @@
 import './App.css'
 // Imports
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios"
 
 //Components
@@ -15,21 +15,41 @@ function App() {
 
   async function search(searchTerm) {
     try {
-      // Make and apiCall and save response in variable
-      let response = await axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&t=${searchTerm}`)
-      setMovieData(response.data)
 
+      if (searchTerm === '') {
+        let min = 1000000
+        let max = 2000000
+
+        let random = Math.round(Math.random() * (max - min)) + min
+        random = "tt" + random
+        console.log(random)
+
+        let response = await axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&i=${random}`)
+        setMovieData(response.data)
+      }
+      else {
+
+        // Make and apiCall and save response in variable
+        let response = await axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&t=${searchTerm}`)
+        setMovieData(response.data)
+      }
     } catch (err) {
       console.error(err)
-
     }
-
   }
+
+  useEffect(() => {
+    search('')
+
+  }, [])
 
   return (
     <>
       <Form movieSearch={search} />
-      <MovieDisplay />
+      {/* Conditional rendering */}
+      {/* {movieData ? <MovieDisplay movie={movieData} /> : <p>Nothing to Display</p>} */}
+      {/* Alternative {movieData && <MovieDisplay movie={movieData} /> } */}
+      <MovieDisplay movie={movieData} />
     </>
   )
 }

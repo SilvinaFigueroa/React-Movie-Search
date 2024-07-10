@@ -13,8 +13,7 @@ const Form = ({ movieSearch }) => {
     return (
         <div>
             <form onSubmit={handleSubmit} action="">
-                <input type="text" name="title" placeholder="Movie Title..." 
-                onChange={handleChange}/>
+                <input type="text" name="title" placeholder="Movie Title..." onChange={handleChange}/>
                 <input type="submit" value="submit" />
             </form>
 
